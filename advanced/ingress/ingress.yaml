@@ -6,6 +6,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-ingress
+  namespace: my-app
   annotations:
     kubernetes.io/ingress.class: "nginx" # Specify the ingress controller to use
     nginx.ingress.kubernetes.io/rewrite-target: /
@@ -14,10 +15,17 @@ spec:
   - host: nginx.example.com # Replace with your domain name
     http:
       paths:
-      - path: /test
+      - path: /test/app1
         pathType: Prefix
         backend:
           service:
             name: nginx-service # The Service exposing the app
+            port:
+              number: 80
+      - path: /test/app2
+        pathType: Prefix
+        backend:
+          service:
+            name: hw-nginx-service # The Service exposing the app
             port:
               number: 80

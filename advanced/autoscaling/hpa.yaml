@@ -2,13 +2,13 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: memory-hpa-test
-  namespace: stress-test
+  namespace: default
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: memory-hpa-test
-  #minReplicas: 1
+  minReplicas: 1
   behavior:
     scaleDown:
       policies:
@@ -18,25 +18,19 @@ spec:
       selectPolicy: Max
     scaleUp:
       policies:
-      - periodSeconds: 5
-        type: Pods
-        value: 4
+      # - periodSeconds: 5
+      #   type: Pods
+      #   value: 10
       - periodSeconds: 5
         type: Percent
         value: 100
       selectPolicy: Max
-      stabilizationWindowSeconds: 0
-  maxReplicas: 30
+      stabilizationWindowSeconds: 5
+  maxReplicas: 10
   metrics:
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: Utilization
-        averageUtilization: 90 # Target memory utilization percentage
   - type: Resource
     resource:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 60 # Target CPU utilization percentage
+        averageUtilization: 85 # Target CPU utilization percentage
