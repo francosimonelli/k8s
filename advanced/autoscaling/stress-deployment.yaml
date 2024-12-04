@@ -20,12 +20,12 @@ spec:
       - name: pod-stress-test
         image: polinux/stress-ng
         command: [ "/bin/sh", "-c" ]
-        args: [ "stress-ng --cpu 1 --cpu-load 10 --timeout 300s" ] #CHILL
-        #args: [ "stress-ng --cpu 15 --cpu-load 25 --timeout 300s" ] #ONLY CPU
+        args: [ "stress-ng --cpu 1 --cpu-load 5 --timeout 300s" ]
+        #args: [ "stress-ng --cpu 10 --cpu-load 15 --timeout 300s" ] BUMP CPU
         resources:
           requests:
             memory: "64Mi" # Minimum memory request
-            cpu: "150m" # Minimum CPU request
+            cpu: "250m" # Minimum CPU request
           limits:
             memory: "512Mi" # Maximum memory limit IF WE DISABLE THIS->OOMKilled
-            cpu: "200m" # Maximum CPU limit
+            cpu: "400m" # Maximum CPU limit

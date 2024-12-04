@@ -14,18 +14,18 @@ spec:
       policies:
       - periodSeconds: 5
         type: Percent
-        value: 100
+        value: 400 # Hasta 4 veces el numero de current pods pueden ser quitados
       selectPolicy: Max
     scaleUp:
       policies:
-      # - periodSeconds: 5
-      #   type: Pods
-      #   value: 10
+      - periodSeconds: 5
+        type: Pods
+        value: 6 # Hasta 6 pods pueden ser agregados
       - periodSeconds: 5
         type: Percent
-        value: 100
+        value: 400
       selectPolicy: Max
-      stabilizationWindowSeconds: 5
+      #stabilizationWindowSeconds: 5
   maxReplicas: 10
   metrics:
   - type: Resource
