@@ -1,0 +1,36 @@
+version: '3.8'
+
+# Definición de los servicios en Docker Compose
+services:
+  # Servicio de Flask (backend)
+  flask-app:
+    build: .  # Construye la imagen de Flask usando el Dockerfile en el directorio actual
+    ports:
+      - "5000:5000"  # Mapea el puerto 5000 del contenedor al puerto 5000 de la máquina host
+    depends_on:
+      - mysql-db  # Asegura que el contenedor de MySQL se inicie antes de Flask
+    volumes:
+      #- ./app:/app  # Mapea el directorio local ./app al contenedor en /app (si necesitas acceder al código de la app)
+      - ./app:/app
+  # Servicio de MySQL (base de datos)
+  mysql-db:
+    image: mysql:8.0  # Usamos la imagen oficial de MySQL versión 8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass  # Establece la contraseña del usuario root de MySQL
+      MYSQL_DATABASE: demo  # Crea una base de datos llamada 'demo' al iniciar el contenedor
+    ports:
+      - "3306:3306"  # Mapea el puerto 3306 del contenedor al puerto 3306 de la máquina host (puerto estándar de MySQL)
+    volumes:
+      - mysql-data:/var/lib/mysql  # Persistencia de datos: usa un volumen para almacenar los datos de MySQL
+      - ./init_db.sql:/docker-entrypoint-initdb.d/init_db.sql  # Mapea el script de inicialización para crear la tabla de productos
+
+  # nicolaka:
+  #   image: nicolaka/netshoot  # Usamos la imagen de Nicolaka Netshoot
+  #   ports:
+  #     - "8080:8080"  # Mapea el puerto 8080 del contenedor al puerto 8080 de la máquina host
+
+# Definición de volúmenes, para persistencia de datos de MySQL
+volumes:
+  mysql-data:
+    driver: local  # Se utiliza un volumen local para almacenar los datos de MySQL, garantizando que no se pierdan al reiniciar el contenedor
+
