@@ -25,13 +25,13 @@ spec:
           requests:
             memory: "256Mi"
             cpu: "250m"
-        volumeMounts:
-        - mountPath: /app
-          name: app-code
-      volumes:
-      - name: app-code
-        hostPath:
-          path: /app # This needs to be adjusted based on your Kubernetes host configuration
+      #   volumeMounts:
+      #   - mountPath: /app
+      #     name: app-code
+      # volumes:
+      # - name: app-code
+      #   hostPath:
+      #     path: /app # This needs to be adjusted based on your Kubernetes host configuration
 ---
 apiVersion: v1
 kind: Service
