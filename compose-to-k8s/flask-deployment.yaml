@@ -18,17 +18,17 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 5000
-        # env:
-        # - name: MYSQL_HOST
-        #   value: mysql-service # Service name for MySQL
-        # - name: MYSQL_PORT
-        #   value: "3306" # MySQL port
-        # - name: MYSQL_USER
-        #   value: root # MySQL user
-        # - name: MYSQL_PASSWORD
-        #   value: rootpass # MySQL password
-        # - name: MYSQL_DATABASE
-        #   value: demo # MySQL database name
+        env:
+        - name: MYSQL_HOST
+          value: mysql-service # Service name for MySQL
+        - name: MYSQL_PORT
+          value: "3306" # MySQL port
+        - name: MYSQL_USER
+          value: root # MySQL user
+        - name: MYSQL_PASSWORD
+          value: rootpass # MySQL password
+        - name: MYSQL_DATABASE
+          value: demo # MySQL database name
         resources:
           limits:
             memory: "256Mi"
