@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: compose-flask-app # Build and push this image to a container registry
+        image: flask # Build and push this image from compose directory "docker build -t flask ." and then "minikube cache add flask:latest"
         imagePullPolicy: Never
         ports:
         - containerPort: 5000
@@ -36,13 +36,6 @@ spec:
           requests:
             memory: "256Mi"
             cpu: "250m"
-      #   volumeMounts:
-      #   - mountPath: /app
-      #     name: app-code
-      # volumes:
-      # - name: app-code
-      #   hostPath:
-      #     path: /app # This needs to be adjusted based on your Kubernetes host configuration
 ---
 apiVersion: v1
 kind: Service
