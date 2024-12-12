@@ -6,7 +6,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-ingress
-  namespace: my-app
+  #namespace: my-app
   annotations:
     kubernetes.io/ingress.class: "nginx" # Specify the ingress controller to use
     nginx.ingress.kubernetes.io/rewrite-target: /
@@ -29,3 +29,13 @@ spec:
             name: hw-nginx-service # The Service exposing the app
             port:
               number: 80
+  # - host: argentina.com
+  #   http:
+  #     paths:
+  #     - path: /test/app2
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: hw-nginx-service # The Service exposing the app
+  #           port:
+  #             number: 80
