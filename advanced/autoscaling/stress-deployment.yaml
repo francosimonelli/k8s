@@ -20,8 +20,9 @@ spec:
       - name: pod-stress-test
         image: polinux/stress-ng
         command: [ "/bin/sh", "-c" ]
-        args: [ "stress-ng --cpu 1 --cpu-load 5 --timeout 300s" ]
+        args: [ "stress-ng --cpu 1 --cpu-load 5 --timeout 3000s" ]
         #args: [ "stress-ng --cpu 10 --cpu-load 15 --timeout 300s" ] BUMP CPU
+        #args: [ "stress-ng --vm 10 --cpu 10 --cpu-load 15 --timeout 300s" ] BUMP CPU MORE (Increase limits)
         resources:
           requests:
             memory: "64Mi" # Minimum memory request
